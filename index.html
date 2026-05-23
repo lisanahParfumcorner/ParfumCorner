@@ -1,205 +1,30 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>Parfum Corner - Sistem Chatbot</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-body{font-family:Arial;margin:0;background:#f4f8ff;}
-header{background:#1565c0;color:white;padding:15px;text-align:center;}
-nav{background:#0d47a1;padding:10px;text-align:center;}
-nav button{margin:5px;padding:10px;border:none;color:white;background:#1976d2;cursor:pointer;border-radius:5px}
-section{display:none;padding:20px;}
-.active{display:block;}
-.card{background:white;padding:15px;margin:10px;border-radius:10px;box-shadow:0 0 5px rgba(0,0,0,0.2);}
-input,textarea{width:100%;padding:8px;margin:5px 0;}
-button{cursor:pointer;}
-.chatbox{background:#e3f2fd;padding:10px;height:200px;overflow:auto;}
-</style>
-</head>
-
-<body>
-
-<header>
-<h2>PARFUM CORNER - SISTEM CHATBOT</h2>
-</header>
-
-<!-- LOGIN -->
-<section id="login" class="active">
-<div class="card">
-<h3>Login Sistem</h3>
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="login()">LOGIN</button>
-<p>Admin: admin / 123 | User: user / 123</p>
-</div>
-</section>
-
-<!-- MENU -->
-<nav id="menu" style="display:none;">
-<button onclick="show('home')">Home</button>
-<button onclick="show('chat')">Chatbot</button>
-<button onclick="show('produk')">Produk</button>
-<button onclick="show('promo')">Promo</button>
-<button onclick="show('tracking')">Tracking</button>
-<button id="adminBtn" onclick="show('admin')" style="display:none;">Admin</button>
-<button onclick="logout()">Logout</button>
-</nav>
-
-<!-- HOME -->
-<section id="home">
-<div class="card">
-<h3>Dashboard</h3>
-<p>Selamat datang di sistem Parfum Corner</p>
-</div>
-
-<div class="card">
-<h3>Grafik Produk Terpopuler</h3>
-<canvas id="chart"></canvas>
-</div>
-</section>
-
-<!-- CHATBOT -->
-<section id="chat">
-<div class="card">
-<h3>Chatbot Parfum</h3>
-<div class="chatbox" id="chatbox"></div>
-<input id="msg" placeholder="Tanya parfum...">
-<button onclick="send()">Kirim</button>
-</div>
-</section>
-
 <!-- PRODUK -->
 <section id="produk">
+
 <div class="card">
-<h3>Data Produk</h3>
-<div id="listProduk"></div>
+<h3>Data Produk Parfum</h3>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+
+  <!-- PRODUK 1 -->
+  <div style="width:220px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+    <img src="fres.jpg" style="width:100%;height:200px;object-fit:cover;">
+    <div style="padding:10px;">
+      <h4>Parfum Fresh</h4>
+      <p>Aroma segar & ringan</p>
+    </div>
+  </div>
+
+  <!-- PRODUK 2 -->
+  <div style="width:220px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+    <img src="woody.jpg" style="width:100%;height:200px;object-fit:cover;">
+    <div style="padding:10px;">
+      <h4>Parfum Woody</h4>
+      <p>Aroma maskulin & elegan</p>
+    </div>
+  </div>
+
+</div>
+
 </div>
 </section>
-
-<!-- PROMO -->
-<section id="promo">
-<div class="card">
-<h3>Promo</h3>
-<p>🔥 Diskon 20% semua parfum best seller</p>
-</div>
-</section>
-
-<!-- TRACKING -->
-<section id="tracking">
-<div class="card">
-<h3>Tracking Pesanan</h3>
-<p id="status">Status: Menunggu</p>
-<button onclick="updateStatus()">Update Status</button>
-</div>
-</section>
-
-<!-- ADMIN -->
-<section id="admin">
-<div class="card">
-<h3>Admin Panel - Tambah Produk</h3>
-<input id="nama" placeholder="Nama Parfum">
-<input id="aroma" placeholder="Aroma">
-<button onclick="addProduk()">Tambah</button>
-</div>
-</section>
-
-<script>
-
-let role="";
-
-function login(){
-let u=document.getElementById("user").value;
-let p=document.getElementById("pass").value;
-
-if(u=="admin"&&p=="123"){
-role="admin";
-document.getElementById("adminBtn").style.display="inline-block";
-startApp();
-}
-else if(u=="user"&&p=="123"){
-role="user";
-startApp();
-}
-else alert("Login gagal");
-}
-
-function startApp(){
-document.getElementById("login").style.display="none";
-document.getElementById("menu").style.display="block";
-show("home");
-loadProduk();
-chart();
-}
-
-function logout(){location.reload();}
-
-function show(id){
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-function send(){
-let msg=document.getElementById("msg").value;
-let box=document.getElementById("chatbox");
-
-box.innerHTML+="<b>User:</b> "+msg+"<br>";
-
-let reply="Maaf tidak mengerti";
-
-if(msg.includes("fresh")) reply="Rekomendasi: parfum citrus & aqua fresh";
-if(msg.includes("tahan lama")) reply="Gunakan parfum woody atau musk";
-if(msg.includes("mahal")) reply="Ada promo diskon 20%";
-
-box.innerHTML+="<b>Bot:</b> "+reply+"<br><hr>";
-
-document.getElementById("msg").value="";
-}
-
-let produk=JSON.parse(localStorage.getItem("produk"))||[
-{nama:"Parfum A",aroma:"Fresh",populer:10},
-{nama:"Parfum B",aroma:"Woody",populer:20}
-];
-
-function loadProduk(){
-let html="";
-produk.forEach(p=>{
-html+=`<p><b>${p.nama}</b> - ${p.aroma}</p>`;
-});
-document.getElementById("listProduk").innerHTML=html;
-}
-
-function addProduk(){
-let n=document.getElementById("nama").value;
-let a=document.getElementById("aroma").value;
-
-produk.push({nama:n,aroma:a,populer:5});
-localStorage.setItem("produk",JSON.stringify(produk));
-alert("Produk ditambahkan");
-loadProduk();
-chart();
-}
-
-function chart(){
-let ctx=document.getElementById("chart");
-new Chart(ctx,{
-type:"bar",
-data:{
-labels:produk.map(p=>p.nama),
-datasets:[{
-label:"Produk Terpopuler",
-data:produk.map(p=>p.populer)
-}]
-}
-});
-}
-
-function updateStatus(){
-document.getElementById("status").innerText="Status: Sedang Dikirim";
-}
-
-</script>
-
-</body>
-</html>

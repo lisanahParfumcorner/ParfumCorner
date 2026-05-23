@@ -107,18 +107,20 @@ footer{
     <a href="#">Tracking</a>
 </nav>
 
+<!-- LOGIN -->
 <div class="login-box">
 
 <h2 align="center">Login Pelanggan</h2>
 
-<input type="text" placeholder="Masukkan Username">
+<input type="text" id="username" placeholder="Masukkan Username">
 
-<input type="password" placeholder="Masukkan Password">
+<input type="password" id="password" placeholder="Masukkan Password">
 
-<button>LOGIN</button>
+<button onclick="login()">LOGIN</button>
 
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
 <div class="card">
@@ -153,6 +155,25 @@ footer{
 <footer>
 © 2026 Parfum Corner
 </footer>
+
+<!-- SCRIPT LOGIN -->
+<script>
+
+function login() {
+
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if (user === "admin" && pass === "123") {
+        alert("Login berhasil!");
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Username atau password salah!");
+    }
+
+}
+
+</script>
 
 </body>
 </html>

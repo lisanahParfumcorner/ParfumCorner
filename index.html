@@ -2,15 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parfum Corner</title>
+<title>Dashboard Parfum Corner</title>
 
 <style>
-
 body{
-    margin:0;
     font-family:Arial;
     background:#f4f8ff;
+    margin:0;
 }
 
 header{
@@ -20,160 +18,34 @@ header{
     text-align:center;
 }
 
-nav{
-    background:#0d47a1;
-    padding:12px;
-    text-align:center;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:15px;
-    font-weight:bold;
-}
-
-.container{
-    width:90%;
-    margin:auto;
-}
-
-.card{
+.box{
     background:white;
+    margin:20px;
     padding:20px;
-    margin-top:20px;
     border-radius:10px;
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
-
-.login-box{
-    width:300px;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-button{
-    background:#1565c0;
-    color:white;
-    border:none;
-    padding:10px;
-    width:100%;
-    margin-top:15px;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-.chatbox{
-    background:#e3f2fd;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-footer{
-    background:#1565c0;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:30px;
-}
-
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>PARFUM CORNER</h1>
-    <p>Sistem Chatbot Pelayanan Informasi Produk Parfum</p>
+    <h1>Dashboard Pelanggan</h1>
 </header>
 
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Login</a>
-    <a href="#">Chatbot</a>
-    <a href="#">Promo</a>
-    <a href="#">Tracking</a>
-</nav>
-
-<!-- LOGIN -->
-<div class="login-box">
-
-<h2 align="center">Login Pelanggan</h2>
-
-<input type="text" id="username" placeholder="Masukkan Username">
-
-<input type="password" id="password" placeholder="Masukkan Password">
-
-<button onclick="login()">LOGIN</button>
-
+<div class="box">
+    <h2>Selamat Datang 👋</h2>
+    <p>Kamu berhasil login ke Parfum Corner</p>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
-
-<div class="card">
-
-<h2>Chatbot Parfum</h2>
-
-<div class="chatbox">
-<p><b>User :</b> parfum fresh apa yang cocok?</p>
-<p><b>Bot :</b> rekomendasi parfum citrus dan aqua fresh.</p>
+<div class="box">
+    <h2>Menu</h2>
+    <p>- Lihat Produk</p>
+    <p>- Promo</p>
+    <p>- Tracking Pesanan</p>
 </div>
-
-</div>
-
-<div class="card">
-
-<h2>Promo Hari Ini</h2>
-
-<p>Diskon 20% parfum best seller minggu ini.</p>
-
-</div>
-
-<div class="card">
-
-<h2>Tracking Pesanan</h2>
-
-<p>Status Pesanan : Sedang Dikirim</p>
-
-</div>
-
-</div>
-
-<footer>
-© 2026 Parfum Corner
-</footer>
-
-<!-- SCRIPT LOGIN -->
-<script>
-
-function login() {
-
-    var user = document.getElementById("username").value;
-    var pass = document.getElementById("password").value;
-
-    if (user === "admin" && pass === "123") {
-        alert("Login berhasil!");
-        window.location.href = "dashboard.html";
-    } else {
-        alert("Username atau password salah!");
-    }
-
-}
-
-</script>
 
 </body>
 </html>
